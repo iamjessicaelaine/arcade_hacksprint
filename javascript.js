@@ -22,8 +22,10 @@ name="riddle${riddleNumber}" value=${letter}">
 
       // add this question and its answers to the output
       output.push(
-                    `<div class="riddle"> ${currentRiddle.riddle} </div>
-                    <div class="answers"> ${answers.join('')} </div>`
+                    `<div class="slide">
+                      <div class="riddle"> ${currentRiddle.riddle} </div>
+                      <div class="answers"> ${answers.join('')} </div>
+                     </div>`
       );
     }
     );
@@ -38,9 +40,37 @@ name="riddle${riddleNumber}" value=${letter}">
     // keep track of user's answers
     let numCorrect = 0;
     // for each question....
-    myQuestions.forEach( (currentRiddle, riddleNumber) => {
+    myRiddles.forEach((currentRiddle, riddleNumber) => {
     // find selected answer
+      const answerContainer = answerContainers[riddleNumber];
+      const selector = `input[name=riddle${riddleNumber}]:checked`;
+      const userAnswer = (answerContainer.querySelector(selector) ||
+{}).value;
+      // if answer is correc
+      if (userAnswer === currentRiddle.correctAnswer) {
+      // add to the number of correct answers
+        numCorrect++;
+        // color the answers green
+        answerContainers[riddleNumber].style.color = 'lightgreen';
 
+      // if answer is wrong or blank
+      } else {
+      // color the answers red
+        answerContainers[riddleNumber].style.color = 'red';
+      }
+    });
+
+    // show numbeer of correct answers out of total
+    resultsContainer.innerHTML = `${numCorrect} out of ${myRiddles.length}`;
+  }
+
+  function showSlide (n) {
+    slides[currentSlide].classList.remove('active-slide');
+    slides[n].classList.add('active-slide');
+    currentSlide = n;
+    if (currentSlide === 0) {
+      submitButton.style.display = 'inline-block';
+    }
   }
 
   // variables
@@ -79,6 +109,13 @@ name="riddle${riddleNumber}" value=${letter}">
 
   // display quiz right away
   buildQuiz();
+
+  // pagination
+  const slides = document.querySelectorAll('.slide');
+  let currentSlide = 0;
+
+  // show the first slide
+  showSlide(currentSlide);
 
   // on submit, show results
   submitButton.addEventListener('click', showResults);
