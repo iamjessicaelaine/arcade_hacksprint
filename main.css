@@ -50,7 +50,7 @@ h1{
     margin-bottom: 10px;
 }
 
-#submit{
+button{
     font-family: 'Work Sans', sans-serif;
     font-size: 22px;
     background-color: #5E92D8;
@@ -62,7 +62,7 @@ h1{
     margin-bottom: 20px;
 }
 
-#submit:hover{
+button:hover{
     background-color: #3388AA;
 }
 
