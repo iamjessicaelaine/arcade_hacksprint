@@ -1,0 +1,12 @@
+@import url(https://fonts.googleapis.com/css?family=Work+Sans:300,600);
+
+body{
+    font-size: 20px;
+    font-family: 'Work Sans', sans-serif;
+    color: #630330;
+    font-weight: 300;
+    text-align: center;
+    background-color: #CBC3E3;
+}
+
+h1
